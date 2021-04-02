@@ -8,14 +8,14 @@ int main()
 {
 	string name;
 	char initial;
-	int age;
+	short age = 0;
 	bool isAdult = false;
-	int zipcode;
+	int zipcode = 0;
 	double wage = 0.0;
-	short daysWorked;
+	short daysWorked = 0;
 	short hoursWorkedPerDay[7];
 
-	const float TAX = 0.3f;
+	const float TAX = 0.2f;
 
 	cout << "Enter First Name: " << endl;
 	cin >> name;
