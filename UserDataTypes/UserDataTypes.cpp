@@ -1,43 +1,53 @@
 
-
+#include "Employee.h"
 #include <iostream>
 using namespace std;
 
-class Sandwich
-{
-public:
-    char name[32];
-    bool isHot;
-    float price;
+//typedef double currency; // C-Style
+//using currency = double; // C++ Style
 
-    void Display() { cout << "Price: " << price << endl; }
-
-    //static float TAX;
-};
 
 int main()
-{
-    cout << "Hello World!\n";
+{	
+	Employee employee[5];
+	unsigned short numEmployees;
+	cout << "Number of Employees: ";
+	cin >> numEmployees;
 
-    //Sandwich.TAX = 0.03f;
+	for (int counter = 0;  counter < numEmployees; counter++) {
+		employee[counter].Read();
+	};
 
-    Sandwich turkey;
-    //turkey.name = "Turkey";
-
-    //turkey.TAX = 0.03f;
-    turkey.isHot = true;
-    turkey.price = 5.0f;
-    turkey.Display();
-
-    //cout << sizeof(Sandwich);
-
-    int i = 10;
-    char c = 23;
-
-    c = (char)i;
-
-    float f = 23.4f;
-    double d = 34.0;
-
-    f = static_cast<float>(d);
+	for (int counter = 0; counter < numEmployees; counter++) {
+		employee[counter].Write();
+	};
 }
+
+/*Sandwich sandwich;
+sandwich.Read();
+sandwich.Write();
+
+cout << SHOP_NAME << endl;*/
+
+//#ifdef XBOX
+//	cout << "xbox\n";
+//#endif
+//
+//#ifdef _DEBUG
+//	cout << "debug\n";
+//#endif
+
+	//currency wage; // 12.50f
+
+	//enum Difficulty 
+	//{
+	//	Easy,
+	//	Medium,
+	//	Hard
+	//};
+
+	//Difficulty difficulty;
+	//difficulty = Easy;
+
+
+	//cout << sizeof(Difficulty) << endl;
