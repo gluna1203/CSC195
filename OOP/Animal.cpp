@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-void Animal::Speak()
-{
-	cout << "???\n";
-}
+//void Animal::Speak()
+//{
+//	cout << "???\n";
+//}

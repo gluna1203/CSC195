@@ -17,7 +17,7 @@ public:
 		delete m_p;
 	}
 
-	void Speak();
+	virtual void Speak() = 0; // Pure Virtual Function (Abstract)
 
 	int GetLifespan() { return m_lifespan; }
 	void SetLifespan(int lifespan) 
