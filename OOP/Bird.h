@@ -11,6 +11,8 @@ public:
 	}
 	void Speak() override;
 
+	void Fly();
+
 protected:
 	float m_flightSpeed = 0.0f;
 };

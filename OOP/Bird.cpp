@@ -6,3 +6,8 @@ void Bird::Speak()
 {
 	cout << "Cheep!" << endl;
 }
+
+void Bird::Fly()
+{
+	cout << "Weee!" << endl;
+}
