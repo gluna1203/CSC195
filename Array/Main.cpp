@@ -37,4 +37,10 @@ int main()
 	std::cout << "back: " << words.back() << std::endl;
 	std::cout << "size: " << words.size() << std::endl;
 	std::cout << "data: " << words.data() << std::endl;
+
+	arr::array<char, 5> test{};
+
+	std::cout << test.empty();
+
+
 }
