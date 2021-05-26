@@ -19,12 +19,16 @@ public:
 
 	 friend ofstream& operator << (ofstream& ostream, Products& product);
 	 friend ifstream& operator >> (ifstream& istream, Products& product);
-
+	 
 	enum object 
 	{
 		movie = 1,
 		music
 	};
+
+	friend bool operator == (const std::unique_ptr<Products>& product, const std::string& name) { return (product->getName() == name); }
+	friend bool operator == (const std::unique_ptr<Products>& product, object type) { return (product->getType() == type); }
+
 
 	virtual object getType() = 0;
 	string getName();

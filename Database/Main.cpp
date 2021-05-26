@@ -1,6 +1,9 @@
 #include <iostream>
 #include "DataBase.h"
 #include <string>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 using namespace std;
 
 
@@ -20,6 +23,7 @@ int main()
 		cout << "4) Display by Type" << endl;
 		cout << "5) Load" << endl;
 		cout << "6) Save" << endl;
+		cout << "7) Remove" << endl;
 		cout << endl;
 		cout << "0) Exit" << endl;
 		cout << "Make Selection: ";
@@ -78,6 +82,38 @@ int main()
 		cout << endl;
 		cout << "Data Saved!\n";
 			break;
+		case 7:
+			cout << "1) All\n";
+			cout << "2) Name\n";
+			cout << "3) Type\n";
+			cout << "enter: ";
+			int selection;
+			std::cin >> selection;
+			if (selection == 1)
+			{
+				database->deleteList();
+			}
+			else if (selection == 2)
+			{
+				{
+					cout << "Enter Name: ";
+					string name;
+					cin >> name;
+					database->Remove(name);
+				}
+			}
+			else 
+			{
+				{
+					cout << "1) Movie" << endl;
+					cout << "2) Music" << endl;
+					cout << "enter: ";
+					int type;
+					cin >> type;
+					database->Remove(static_cast<Products::object>(type));
+				}
+			}
+			break;
 		case 0:
 			keepGoing = false;
 			cout << endl;
@@ -86,9 +122,10 @@ int main()
 			delete database;
 			break;
 		default:
-			cout << "Enter a Number Between 0-4" << endl;
+			cout << "Enter a Number Between 0-7" << endl;
 			break;
 		}
 	}
 	
+	_CrtDumpMemoryLeaks();
 }

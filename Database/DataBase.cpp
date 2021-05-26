@@ -32,7 +32,8 @@ void DataBase::Add()
 
 	cin >> *product;
 	//product->Read();
-	m_objects.push_back(product);
+	m_objects.push_back(unique_ptr<Products>{product});
+	delete product;
 
 }
 
@@ -46,7 +47,7 @@ void DataBase::DisplayAll()
 	}
 	else
 	{
-		for (Products* allProducts : m_objects)
+		for (auto& allProducts : m_objects)
 			{
 				cout << endl;
 				cout << *allProducts;
@@ -68,7 +69,7 @@ void DataBase::DisplayAll(const std::string& name)
 	}
 	else 
 	{
-		for (Products* allProducts : m_objects)
+		for (auto& allProducts : m_objects)
 			{
 				if (allProducts->getName() == name)
 				{
@@ -93,7 +94,7 @@ void DataBase::Display(Products::object type)
 	}
 	else
 	{
-			for (Products* allProducts : m_objects)
+			for (auto& allProducts : m_objects)
 		{
 			if (allProducts->getType() == type)
 			{
@@ -109,10 +110,10 @@ void DataBase::Display(Products::object type)
 
 void DataBase::deleteList() 
 {
-	for (Products* allProducts : m_objects) 
+	/*for (auto& allProducts : m_objects) 
 	{
 		delete allProducts;
-	}
+	}*/
 	m_objects.clear();
 }
 
@@ -129,10 +130,10 @@ void DataBase::Load(const string& filename)
 
 			if (input.fail()) break;
 
-			Products* product = Create(static_cast<Products::object>(type));
+			unique_ptr<Products> product = Create(static_cast<Products::object>(type));
 			//product->Read(input);
 			input >> *product;
-			m_objects.push_back(product);
+			m_objects.push_back(move(product));
 		}
 	}
 	input.close();
@@ -143,7 +144,7 @@ void DataBase::Save(const string& filename)
 	ofstream output(filename);
 	if (output.is_open())
 	{
-		for (Products* product : m_objects)
+		for (auto& product : m_objects)
 		{
 			output << static_cast<int>(product->getType()) << endl;
 			//product->Write(output);
@@ -153,7 +154,33 @@ void DataBase::Save(const string& filename)
 	output.close();
 }
 
-Products* DataBase::Create(Products::object type)
+void DataBase::Remove(const std::string& name)
+{
+	for (auto iter = m_objects.begin(); iter != m_objects.end();)
+	{
+		iter = std::find(iter, m_objects.end(), name);
+		if (iter != m_objects.end())
+		{
+			iter = m_objects.erase(iter);
+		}
+	}
+	cout << "Object(s) deleted!" << endl;
+}
+
+void DataBase::Remove(Products::object type)
+{
+	for (auto iter = m_objects.begin(); iter != m_objects.end();)
+	{
+		iter = std::find(iter, m_objects.end(), type);
+		if (iter != m_objects.end())
+		{
+			iter = m_objects.erase(iter);
+		}
+	}
+	cout << "Object(s) deleted!" << endl;
+}
+
+unique_ptr<Products> DataBase::Create(Products::object type)
 {
 	Products* product = nullptr;
 	switch (type)
@@ -167,5 +194,5 @@ Products* DataBase::Create(Products::object type)
 	default:
 		break;
 	}
-	return product;
+	return unique_ptr<Products>{product};
 }

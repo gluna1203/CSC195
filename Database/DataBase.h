@@ -3,6 +3,8 @@
 #include "Music.h"
 #include <iostream>
 #include <vector>
+#include <list>
+#include <memory>
 #include <string>
 using namespace std;
 
@@ -19,9 +21,13 @@ public:
 	void Load(const string& filename);
 	void Save(const string& filename);
 
-	vector<Products*> m_objects;
+	void Remove(const std::string& name);
+	void Remove(Products::object type);
+
+	//vector<Products*> m_objects;
+	list<unique_ptr<Products>> m_objects;
 
 private:
-	Products* Create(Products::object type);
+	unique_ptr<Products> Create(Products::object type);
 };
 
